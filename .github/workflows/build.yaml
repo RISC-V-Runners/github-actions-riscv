@@ -10,7 +10,7 @@ jobs:
     - name: Clone repositories
       run: |
         rm -rf runner
-        git clone -b mliezun/riscv64_runner_2.325.0 https://github.com/mliezun/runner --depth 1
+        git clone -b mliezun/riscv64_runner_2.326.0 https://github.com/mliezun/runner --depth 1
 
     - name: Download .NET
       run: |
