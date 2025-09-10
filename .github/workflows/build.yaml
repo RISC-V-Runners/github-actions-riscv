@@ -10,7 +10,7 @@ jobs:
     steps:
     - name: Clone repositories
       run: |
-        rm -rf runner
+        rm -rf github-runner
         git clone -b riscv64/v2.328.0 https://github.com/RISC-V-Runners/github-runner --depth 1
 
     - name: Download .NET
