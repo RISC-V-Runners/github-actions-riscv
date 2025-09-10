@@ -1,36 +1,48 @@
-# GitHub Actions on RISC-V
+# GitHub Actions Runner for RISC-V
 
-This repository provides a guide on how to build and use GitHub Actions (GitHub CI) on Self-Hosted RISC-V CPU machines.
+This repository builds the GitHub Actions runner for RISC-V64 architecture, making it available for anyone to use. This project uses runners provided by [riscvrunners.com](https://www.riscvrunners.com).
 
-**Disclaimer**: this project is not related to GitHub or .NET development. Any instructions or binary packages published in the spirit of the open source. Use carefully.
+> You can get 3000 free minutes/month to run your Github actions by signing up in [riscvrunners.com](https://www.riscvrunners.com).
 
-## How to use
+## Quick Start
 
-Use a [pre-compiled](https://github.com/dkurt/github_actions_riscv/releases) version or follow the build steps from [build.yaml](.github/workflows/build.yaml).
-Cross-compilation is not supported for now so build process is performed on RISC-V board which takes about 1 hour.
+### 1. Download the Runner
 
-After unpacking the runner archive, install .NET:
-```bash
-cd $HOME
-wget https://github.com/dkurt/dotnet_riscv/releases/download/v8.0.101/dotnet-sdk-8.0.101-linux-riscv64.tar.gz
+Download the latest pre-compiled runner from the [releases page](https://github.com/RISC-V-Runners/github-actions-riscv/releases):
 
-sudo mkdir /usr/share/dotnet
-cd /usr/share/dotnet
-sudo tar -xf $HOME/dotnet-sdk-8.0.101-linux-riscv64.tar.gz
+```
+wget https://github.com/RISC-V-Runners/github-actions-riscv/releases/download/v2.328.0/actions-runner-linux-riscv64-2.328.0.tar.gz
 ```
 
-Verify .NET installation:
+### 2. Extract the Runner
+
+Extract the downloaded archive:
+
 ```bash
-./dotnet --info
+# Create a directory for the runner
+mkdir actions-runner && cd actions-runner
+
+# Extract the archive
+tar -xzf ../actions-runner-linux-riscv64-2.328.0.tar.gz
 ```
 
-Then do `./config.sh` and `./run.sh` as recommended in your repository `Settings->Actions->Runners->New self-hosted runner` tab.
+### 3. Configure the Runner
 
-Runner was tested on:
+Configure the runner with your repository:
 
-| Board | OS | Comment |
-|-------|----|---------|
-| MangoPi MQ-Pro | [Ubuntu 23.10](https://ubuntu.com/download/risc-v) | |
-| Sipeed Lichee RV Dock | [Ubuntu 23.10](https://ubuntu.com/download/risc-v) | |
-| Sipeed Lichee Pi 4A |||
-| Sipeed Lichee RV Dock | [20211230_LicheeRV_debian_d1_hdmi_8723ds.7z](./howto_setup_rvv.md) | Use [GCC version](https://github.com/dkurt/dotnet_riscv/releases) ot .NET because of `fence.tso` hardware bug  |
+```bash
+# Configure the runner (you'll need a token from GitHub)
+./config.sh --url https://github.com/YOUR_USERNAME/YOUR_REPO --token YOUR_TOKEN
+```
+
+You can get the configuration token from your repository's `Settings > Actions > Runners > New self-hosted runner` page.
+
+### 4. Run the Runner
+
+Start the runner:
+
+```bash
+./run.sh
+```
+
+The runner will now be available to execute GitHub Actions workflows on your RISC-V machine.
