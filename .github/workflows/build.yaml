@@ -31,7 +31,7 @@ jobs:
 
     - name: Prepare
       run: |
-        cd runner
+        cd github-runner
         sed -i "s|/home/ubuntu/packages|${{ github.workspace }}|" src/NuGet.Config
 
         mkdir -p _dotnetsdk/8.0.101
@@ -40,16 +40,16 @@ jobs:
 
     - name: Build
       run: |
-        cd runner/src
+        cd github-runner/src
         ./dev.sh layout Release linux-riscv64
 
     - name: Package
       run: |
-        cd runner/src
+        cd github-runner/src
         ./dev.sh package Release linux-riscv64
 
     - name: Upload
       uses: actions/upload-artifact@v4
       with:
         name: actions-runner-linux-riscv64
-        path: "runner/_package/actions-runner-linux-riscv64-*.tar.gz"
+        path: "github-runner/_package/actions-runner-linux-riscv64-*.tar.gz"
