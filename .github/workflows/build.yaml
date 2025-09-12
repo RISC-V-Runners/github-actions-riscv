@@ -70,5 +70,5 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: .
-        push: false
+        push: true
         tags: github-actions-riscv:latest
