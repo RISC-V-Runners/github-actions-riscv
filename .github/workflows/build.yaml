@@ -60,11 +60,19 @@ jobs:
     runs-on: riscvrunners
     
     steps:
+
+    - name: Checkout repository
+      uses: actions/checkout@v5
+
     - name: Download artifact
       uses: actions/download-artifact@v4
       with:
         name: actions-runner-linux-riscv64
         path: ./
+
+    - name: Unzip artifact
+      run: |
+        unzip actions-runner-linux-riscv64*.zip
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
