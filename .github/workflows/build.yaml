@@ -54,3 +54,21 @@ jobs:
       with:
         name: actions-runner-linux-riscv64
         path: "github-runner/_package/actions-runner-linux-riscv64-*.tar.gz"
+
+  docker:
+    needs: build
+    runs-on: riscvrunners
+    
+    steps:
+    - name: Download artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: actions-runner-linux-riscv64
+        path: ./
+
+    - name: Build Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        push: false
+        tags: github-actions-riscv:latest
