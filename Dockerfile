@@ -12,7 +12,6 @@ RUN apt-get update -y && \
 # Add unprivileged user
 RUN useradd --create-home --shell /bin/bash --uid 1001 runner && \
     usermod -aG sudo runner && \
-    mkdir -p /home/runner/.local/share/containers && \
     chown -R runner:runner /home/runner && \
     echo "%sudo   ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers
 
