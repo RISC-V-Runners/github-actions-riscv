@@ -86,4 +86,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: ghcr.io/RISC-V-Runners/github-actions-riscv:latest
+        tags: ghcr.io/risc-v-runners/github-actions-riscv:latest
