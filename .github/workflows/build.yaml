@@ -73,9 +73,17 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
 
+    # Log into GitHub Container Registry
+    - name: Log into GitHub Container Registry
+      uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Build Docker image
       uses: docker/build-push-action@v5
       with:
         context: .
         push: true
-        tags: github-actions-riscv:latest
+        tags: ghcr.io/RISC-V-Runners/github-actions-riscv:latest
