@@ -2,7 +2,7 @@ FROM ubuntu:24.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-WORKDIR /opt/runner
+WORKDIR /home/runner
 
 # Install dependencies
 RUN apt-get update -y && \
@@ -22,4 +22,3 @@ RUN tar --no-same-permissions -xzvf actions-runner-linux-riscv64-*.tar.gz && \
     rm actions-runner-linux-riscv64-*.tar.gz
 
 USER runner
-WORKDIR /home/runner
