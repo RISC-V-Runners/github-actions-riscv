@@ -70,10 +70,6 @@ jobs:
         name: actions-runner-linux-riscv64
         path: ./
 
-    - name: Unzip artifact
-      run: |
-        unzip actions-runner-linux-riscv64*.zip
-
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
 
